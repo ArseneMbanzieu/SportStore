@@ -1,0 +1,29 @@
+﻿@*@using SportStore.Data.Models
+@model IEnumerable<Product>*@
+@model SportStore.WebClient.Models.ProductListViewModel
+@using SportStore.WebClient.HtmlHelpers
+
+
+
+@{ 
+    ViewBag.Title = "Products";
+
+}
+
+@foreach(var p in Model.Products)
+{
+    @*<div class="well">
+        <h3>
+            <strong>@p.Name</strong> 
+        <span class="pull-right label label-primary">@p.Price.ToString("c")</span> 
+        </h3>
+        <span class="lead">@p.Description</span>
+    
+    </div>*@
+
+    @Html.Partial("ProductSummary", p)
+
+}
+    <div class="pagination-lg">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+    </div>
